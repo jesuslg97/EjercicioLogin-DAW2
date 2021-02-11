@@ -1,65 +1,41 @@
-<section class="offset-md-2 col-md-8 col-xs-12 custom-form">
-  <div class="d-flex justify-content-center mt-5 content">
-    <div class="col-md-10 col-xs-12 py-4">
-      <div class="row">
-        <div class="col-12 text-center">
-          <h1 class="mb-2">Formulario</h1>
-          <hr class="teal accent-3 mb-4 mt-0 mx-auto border-dark" style="width: 200px;">
+<section class="offset-md-1 col-md-10 col-xs-12">
+  <div class="my-3 content py-3 ">
 
-          <div class="col-12">
-            <%= form_with(model: @usuario, html: { method: :post} ,local: true) do |form| %>
-
-              <div class="row">
-                <div class="col-md-6 col-xs-12">
-                  <div class="form-group">
-                    <%= form.label :tipo %>
-                    <%= form.text_field :tipo %>
-                  </div>
-                  <div class="form-group">
-                    <%= form.label :nombre %>
-                    <%= form.text_field :nombre %>
-                  </div>
-                  <div class="form-group">
-                    <%= form.label :apellidos %>
-                    <%= form.text_field :apellidos %>
-                  </div>
-                  <div class="form-group">
-                    <%= form.label :pais %>
-                    <%= form.text_field :pais %>
-                  </div>
-                  <div class="form-group">
-                    <%= form.label :localidad %>
-                    <%= form.text_field :localidad %>
-                  </div>
-                </div>
-                <div class="col-md-6 col-xs-12">
-                  <div class="form-group">
-                    <%= form.label :direccion %>
-                    <%= form.text_field :direccion %>
-                  </div>
-                  <div class="form-group">
-                    <%= form.label :codigoPostal %>
-                    <%= form.text_field :codigoPostal %>
-                  </div>
-                  <div class="form-group">
-                    <%= form.label :email %>
-                    <%= form.text_field :email %>
-                  </div>
-                  <div class="form-group">
-                    <%= form.label :contraseña %>
-                    <%= form.password_field :contraseña %>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center mb-2 mt-4">
-                <%= form.submit "Guardar", class: "btn btn-dark" %>
-                <%= link_to 'Cancelar', usuarios_index_path, class: "btn btn-primary ml-2" %>
-              </div>
-            <% end %>
-          </div>
-
-        </div>
+    <div class="table-responsive">
+      <div class="w-100 text-center">
+        <h1>Usuarios</h1>
+        <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto border-dark" style="width: 200px;">
       </div>
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Apellidos</th>
+          <th class="text-center">Pais</th>
+          <th class="text-center">Correo</th>
+          <th class="text-center" colspan="3">Acciones</th>
+        </tr>
+        </thead>
+
+        <% @usuario.each do |usuario| %>
+          <tbody>
+          <tr>
+            <td class="text-center align-middle"> <%= usuario.nombre %> </td>
+            <td class="text-center align-middle"> <%= usuario.apellidos %> </td>
+            <td class="text-center align-middle"> <%= usuario.pais %> </td>
+            <td class="text-center align-middle"> <%= usuario.email %> </td>
+            <td class="text-center align-middle">
+              <%= link_to "Detalles", usuario, class: "btn btn-info " %>
+              <%= link_to "Editar", edit_usuario_path(usuario.id), class: "btn btn-success ml-2" %>
+              <%= link_to "Eliminar", usuario, method: :delete, class: "btn btn-danger ml-2",
+                          data: { confirm: '¿Desea eliminar?'} %>
+            </td>
+          </tr>
+
+          </tbody>
+        <% end %>
+      </table>
     </div>
   </div>
 </section>
